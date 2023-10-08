@@ -6,7 +6,7 @@
 const char *ssid = "DIGISOL";
 const char *password = "qas1725utl1";
 const char *mqtt_server = "3.111.108.14";
-const char *sensorName = "sensor_data/vijay@gmail.com-block-43-upper-tank";
+const char *sensorName = "vijay@gmail.com-block-43-upper-tank";
 const int externalLedPin = 0; // GPIO0 (D3) - LED pin connected to NodeMCU
 const int TRIGGER_PIN = 5;    // GPIO5 (D1) - Trigger pin of HC-SR04 connected to NodeMCU
 const int ECHO_PIN = 4;       // GPIO4 (D2) - Echo pin of HC-SR04 connected to NodeMCU
@@ -71,8 +71,11 @@ void reconnect() {
 
     if (client.connect(clientId.c_str(), "root", "manager")) {
       Serial.println("connected");
-      client.publish("outTopic", "hello world");
-      client.subscribe("inTopic");
+      char topicSubscribe[150]; // Adjust the buffer size as needed
+      strcpy(topicSubscribe, sensorName );
+      strcat(topicSubscribe, "/change_status");
+      
+      client.subscribe(topicSubscribe);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -107,9 +110,14 @@ void loop() {
 
     Serial.print("Publish message: ");
     Serial.println(jsonPayload);
-
+    char topicPublish[150]; // Adjust the buffer size as needed
+    strcpy(topicPublish, "sensor_data/");
+    strcat(topicPublish, sensorName);
+    
+    client.publish(topicPublish, jsonPayload.c_str());
     // Publish the JSON payload to the MQTT topic
-    client.publish(sensorName, jsonPayload.c_str());
+   
+    client.publish(topicPublish, jsonPayload.c_str());
   }
 }
 
@@ -118,7 +126,7 @@ String createJsonPayload(int distance, int maxValue) {
   
   jsonDoc["data"] = distance;
   jsonDoc["maxValue"] = maxValue;
-
+  jsonDoc["currentStatus"] = (digitalRead(externalLedPin) == LOW) ? "off" : "on"; // Check the state of externalLedPin
   String payload;
   serializeJson(jsonDoc, payload);
 
