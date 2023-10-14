@@ -3,8 +3,8 @@
 #include <NewPing.h> // Include the NewPing library for the ultrasonic sensor
 #include <ArduinoJson.h>
 
-const char *ssid = "DIGISOL";
-const char *password = "qas1725utl1";
+const char *ssid = "www.dolphinlabs.in";
+const char *password = "123456789";
 const char *mqtt_server = "3.111.108.14";
 const char *sensorName = "vijay@gmail.com-block-43-upper-tank";
 const int externalLedPin = 0; // GPIO0 (D3) - LED pin connected to NodeMCU
@@ -127,6 +127,7 @@ String createJsonPayload(int distance, int maxValue) {
   jsonDoc["data"] = distance;
   jsonDoc["maxValue"] = maxValue;
   jsonDoc["currentStatus"] = (digitalRead(externalLedPin) == LOW) ? "off" : "on"; // Check the state of externalLedPin
+  
   String payload;
   serializeJson(jsonDoc, payload);
 
