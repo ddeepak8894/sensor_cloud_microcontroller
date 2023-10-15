@@ -2,15 +2,23 @@
 #include <PubSubClient.h>
 #include <NewPing.h> // Include the NewPing library for the ultrasonic sensor
 #include <ArduinoJson.h>
+#include <DHT.h>     // Include the DHT library for the DHT11 sensor
 
-const char *ssid = "www.dolphinlabs.in";
-const char *password = "123456789";
+// const char *ssid = "www.dolphinlabs.in";
+// const char *password = "123456789";
+
+const char *ssid = "DIGISOL";
+const char *password = "qas1725utl1";
+
 const char *mqtt_server = "3.111.108.14";
 const char *sensorName = "vijay@gmail.com-block-43-upper-tank";
 const int externalLedPin = 0; // GPIO0 (D3) - LED pin connected to NodeMCU
 const int TRIGGER_PIN = 5;    // GPIO5 (D1) - Trigger pin of HC-SR04 connected to NodeMCU
 const int ECHO_PIN = 4;       // GPIO4 (D2) - Echo pin of HC-SR04 connected to NodeMCU
 const int MAX_DISTANCE = 200; // Maximum distance to measure in centimeters
+
+const int DHTPIN = 2;  // GPIO2 (D4) - Data pin of DHT11 sensor
+const int DHTTYPE = DHT11; // Type of the DHT sensor
 
 WiFiClient espClient;
 
@@ -21,6 +29,7 @@ char msg[MSG_BUFFER_SIZE];
 int value = 0;
 
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+DHT dht(DHTPIN, DHTTYPE);
 
 void setup_wifi() {
   delay(10);
@@ -92,6 +101,7 @@ void setup() {
   setup_wifi();
   client.setServer(mqtt_server, 8883);
   client.setCallback(callback);
+  dht.begin();
 }
 
 void loop() {
@@ -104,9 +114,12 @@ void loop() {
   if (now - lastMsg > 2000) {
     lastMsg = now;
     int distance = sonar.ping_cm();
+    // Read DHT11 sensor data
+    float humidity = dht.readHumidity();
+    float temperature = dht.readTemperature();
 
-    // Create the JSON payload
-    String jsonPayload = createJsonPayload( distance,40);
+       // Create the JSON payload
+    String jsonPayload = createJsonPayload(distance, 40, humidity, temperature);
 
     Serial.print("Publish message: ");
     Serial.println(jsonPayload);
@@ -115,19 +128,17 @@ void loop() {
     strcat(topicPublish, sensorName);
     
     client.publish(topicPublish, jsonPayload.c_str());
-    // Publish the JSON payload to the MQTT topic
-   
-    client.publish(topicPublish, jsonPayload.c_str());
   }
 }
 
-String createJsonPayload(int distance, int maxValue) {
+String createJsonPayload(int distance, int maxValue, float humidity, float temperature) {
   StaticJsonDocument<200> jsonDoc;
   
   jsonDoc["data"] = distance;
   jsonDoc["maxValue"] = maxValue;
   jsonDoc["currentStatus"] = (digitalRead(externalLedPin) == LOW) ? "off" : "on"; // Check the state of externalLedPin
-  
+  jsonDoc["humidity"] = humidity;
+  jsonDoc["temperature"] = temperature;
   String payload;
   serializeJson(jsonDoc, payload);
 
