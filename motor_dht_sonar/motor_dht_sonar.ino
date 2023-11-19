@@ -11,14 +11,16 @@ const char *ssid = "DIGISOL";
 const char *password = "qas1725utl1";
 
 const char *mqtt_server = "3.111.108.14";
+String current_motor_mode = "";
 const char *sensorName = "vijay@gmail.com-block-43-upper-tank";
 const int externalLedPin = 0; // GPIO0 (D3) - LED pin connected to NodeMCU
 const int TRIGGER_PIN = 5;    // GPIO5 (D1) - Trigger pin of HC-SR04 connected to NodeMCU
 const int ECHO_PIN = 4;       // GPIO4 (D2) - Echo pin of HC-SR04 connected to NodeMCU
 const int MAX_DISTANCE = 200; // Maximum distance to measure in centimeters
 
-const int motorPin1 = 4;   // GPIO4 (D2) - Input pin 1 (e.g., IN1) of L293D connected to NodeMCU
-const int motorPin2 = 12;  // GPIO12 (D6) - Input pin 2 (e.g., IN2) of L293D connected to NodeMCU
+const int motorPin1 = 14;   // GPIO14 (D5) - Input pin 1 (e.g., IN1) of L293D connected to NodeMCU
+const int motorPin2 = 13;   // GPIO13 (D7) - Input pin 2 (e.g., IN2) of L293D connected to NodeMCU
+
 
 
 const int DHTPIN = 2;  // GPIO2 (D4) - Data pin of DHT11 sensor
@@ -107,7 +109,7 @@ void loop() {
   client.loop();
 
   unsigned long now = millis();
-  if (now - lastMsg > 2000) {
+  if (now - lastMsg > 5000) {
     lastMsg = now;
     int distance = sonar.ping_cm();
     // Read DHT11 sensor data
@@ -115,7 +117,7 @@ void loop() {
     float temperature = dht.readTemperature();
 
        // Create the JSON payload
-    String jsonPayload = createJsonPayload(distance, 40, humidity, temperature);
+    String jsonPayload = createJsonPayload(distance, 40, humidity, temperature,current_motor_mode);
 
     Serial.print("Publish message: ");
     Serial.println(jsonPayload);
@@ -127,14 +129,16 @@ void loop() {
   }
 }
 
-String createJsonPayload(int distance, int maxValue, float humidity, float temperature) {
+String createJsonPayload(int distance, int maxValue, float humidity, float temperature, String current_motor_mode) {
   StaticJsonDocument<200> jsonDoc;
   
   jsonDoc["data"] = distance;
   jsonDoc["maxValue"] = maxValue;
   jsonDoc["currentStatus"] = (digitalRead(externalLedPin) == LOW) ? "off" : "on"; // Check the state of externalLedPin
-  jsonDoc["humidity"] = humidity;
+  jsonDoc["humidity"] = humidity; 
+
   jsonDoc["temperature"] = temperature;
+  jsonDoc["current_motor_mode"] = current_motor_mode;
   String payload;
   serializeJson(jsonDoc, payload);
 
@@ -144,19 +148,23 @@ String createJsonPayload(int distance, int maxValue, float humidity, float tempe
 void controlMotor(String command) {
   if (command == "on") {
     isMotorOn = true;
+// Run in clockwise direction
+  } else if (command == "full") {
+    isMotorOn = true;
     analogWrite(motorPin1, 255);  // Set motor to full speed
-    digitalWrite(motorPin2, LOW); // Run in clockwise direction
-  } else if (command == "off") {
+    digitalWrite(motorPin2, LOW); 
+  }
+   else if (command == "off") {
     isMotorOn = false;
     digitalWrite(motorPin1, LOW); // Stop the motor
     digitalWrite(motorPin2, LOW);
   } else if (command == "half") {
     isMotorOn = true;
-    analogWrite(motorPin1, 198);  // Set motor to half speed
+    analogWrite(motorPin1, 215);  // Set motor to half speed
     digitalWrite(motorPin2, LOW); // Run in clockwise direction
   } else if (command == "quarter") {
     isMotorOn = true;
-    analogWrite(motorPin1, 64);   // Set motor to quarter speed
+    analogWrite(motorPin1, 198);   // Set motor to quarter speed
     digitalWrite(motorPin2, LOW); // Run in clockwise direction
   } else if (command == "clockwise") {
     if (isMotorOn) {
@@ -197,7 +205,7 @@ void callback(char *topic, byte *payload, unsigned int length) {
     for (int i = 0; i < length; i++) {
       motorCommand += (char)payload[i];
     }
-
+    current_motor_mode=motorCommand;
     controlMotor(motorCommand);
   }
 }
