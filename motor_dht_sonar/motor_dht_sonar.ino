@@ -71,7 +71,7 @@ void reconnect() {
       Serial.println("connected");
       char topicSubscribe[150]; // Adjust the buffer size as needed
       strcpy(topicSubscribe, sensorName );
-      strcat(topicSubscribe, "/change_status");
+      strcat(topicSubscribe, "/button/status");
       
       client.subscribe(topicSubscribe);
       String motorControlTopic = String(sensorName) + "/motor/control";
@@ -109,7 +109,7 @@ void loop() {
   client.loop();
 
   unsigned long now = millis();
-  if (now - lastMsg > 5000) {
+  if (now - lastMsg > 100) {
     lastMsg = now;
     int distance = sonar.ping_cm();
     // Read DHT11 sensor data
@@ -134,7 +134,7 @@ String createJsonPayload(int distance, int maxValue, float humidity, float tempe
   
   jsonDoc["data"] = distance;
   jsonDoc["maxValue"] = maxValue;
-  jsonDoc["currentStatus"] = (digitalRead(externalLedPin) == LOW) ? "off" : "on"; // Check the state of externalLedPin
+  jsonDoc["current_button_status"] = (digitalRead(externalLedPin) == LOW) ?  "1" : "0"; // Check the state of externalLedPin
   jsonDoc["humidity"] = humidity; 
 
   jsonDoc["temperature"] = temperature;
