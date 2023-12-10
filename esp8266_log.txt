@@ -1,0 +1,292 @@
+wifi evt: 7
+wifi evt: 7
+wifi evt: 7
+wifi evt: 7
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: IQAzfZoZdEoXW4Y9gnLE6g==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1212860
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30230us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff18bc sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: 7g5iBhC5kxXlYQGnjDS93A==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1217930
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30236us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff1c64 sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+wifi evt: 7
+wifi evt: 7
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: QH8qBknndw/78bK9EkA1oQ==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1222994
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30199us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff18bc sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+wifi evt: 7
+wifi evt: 7
+wifi evt: 7
+wifi evt: 7
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: ygRxQZGfb9gBz90Kqpiv6w==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1228060
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30326us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff18bc sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: tk7cvIpWJUvz5vdrI2NQMA==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1233126
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30212us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff1c64 sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: IjN4imKZvCDF1a+B46NU+g==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1309106
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30313us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff1c64 sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+wifi evt: 7
+wifi evt: 7
+wifi evt: 7
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: 9fLV6CHcO0mCd3Z1YrIS8w==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1314175
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30315us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff18bc sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+wifi evt: 7
+wifi evt: 7
+wifi evt: 7
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: p/pBI2SCBe4soq75mEomhA==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1319242
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30268us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff1c64 sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+wifi evt: 7
+wifi evt: 7
+wifi evt: 7
+[WS-Client] connect ws...
+[hostByName] Host: 192.168.1.106 is a IP!
+:ref 1
+[WS-Client] connected to 192.168.1.106:5000.
+[WS-Client][sendHeader] sending header...
+[WS-Client][sendHeader] handshake GET / HTTP/1.1
+Host: 192.168.1.106:5000
+Connection: Upgrade
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Key: dJpLbxQRio/Nz/LuyCLDjQ==
+Sec-WebSocket-Protocol: arduino
+Origin: file://
+User-Agent: arduino-WebSocket-Client
+
+[write] n: 245 t: 1324312
+:wr 245 0
+:wrc 245 245 0
+[WS-Client][sendHeader] sending header... Done (30350us).
+:ack 245
+:rn 17
+:rch 17, 168
+:rcl pb=0x3fff1c64 sz=185
+[WS-Client] connection lost.
+:ur 1
+:dsrcv 185
+:close
+:del
+[WS-Client] client disconnected.
+[WSc] Disconnected!
+wifi evt: 7
+wifi evt: 7
+wifi evt: 7
