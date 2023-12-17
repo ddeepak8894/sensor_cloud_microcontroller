@@ -50,6 +50,7 @@ void setup() {
     if(connected) {
         Serial.println("Connecetd!");
             // Create a JSON object
+
   const size_t capacity = JSON_OBJECT_SIZE(3) + 90;
 
   // Create a JSON document with the specified capacity
@@ -60,11 +61,13 @@ void setup() {
   jsonObject["senderName"] = "user111";
   jsonObject["targetUserName"] = "user222";
   jsonObject["message"] = "hare krishna";
-
+  String eventName = "messageSendToUser";
   // Serialize the JSON object to a string
+  String serializedJson;
+  serializeJson(jsonDocument, serializedJson);
 
-
-  String messageToSend = "42[\"messageSendToUser\", {\"senderName\": \"user112233\", \"targetUserName\": \"user332211\", \"message\": \"krushna\"}]";
+  // Constructing the final message
+  String messageToSend = "42[\"" + eventName + "\", " + serializedJson + "]";
 
   // Send the message
   client.send(messageToSend);
@@ -90,21 +93,25 @@ void loop() {
     delay(100);
 }
 
-void sendMessageToServer(const char* eventName, const char* senderName, const char* targetUserName, const char* inputMessage) {
+void sendMessageToServer(const char* eventName, const char* inputMessage) {
     // Create a JSON object
-    const size_t capacity = JSON_OBJECT_SIZE(3) + 90;
+  const size_t capacity = JSON_OBJECT_SIZE(3) + 90;
+
+  // Create a JSON document with the specified capacity
   DynamicJsonDocument jsonDocument(capacity);
 
   // Create individual JSON objects for each field and assign values
   JsonObject jsonObject = jsonDocument.to<JsonObject>();
-  jsonObject["senderName"] = "user111";
-  jsonObject["targetUserName"] = "user222";
-  jsonObject["message"] = "hare krishna";
-
+  jsonObject["senderName"] = senderName;
+  jsonObject["targetUserName"] = targetUserName;
+  jsonObject["message"] = inputMessage;
+ 
   // Serialize the JSON object to a string
+  String serializedJson;
+  serializeJson(jsonDocument, serializedJson);
 
-  // Construct the message to send
-  String messageToSend = "42[\"messageSendToUser\", {\"senderName\": \"user112233\", \"targetUserName\": \"user332211\", \"message\": \"krushna\"}]";
+  // Constructing the final message
+  String messageToSend = "42[\"" + eventName + "\", " + inputMessage + "]";
 
   // Send the message
   client.send(messageToSend);
