@@ -17,7 +17,7 @@ const uint16_t websockets_server_port = 8878;
 
 
 String current_motor_mode = "";
-const char *sensorName = "vijay@gmail.com-block-43-upper-tank";
+const char *sensorName = "chitta-admin@gmail.com-galaxy-society-sensor-pool";
 const char *eventName = "messageToAllUsers";
 const int externalLedPin = 0;  // GPIO0 (D3) - LED pin connected to NodeMCU
 const int TRIGGER_PIN = 5;     // GPIO5 (D1) - Trigger pin of HC-SR04 connected to NodeMCU
@@ -148,7 +148,7 @@ void loop() {
     float temperature = dht.readTemperature();
 
     // Create the JSON payload
-    String jsonPayload = createJsonPayload(distance, 40, humidity, temperature, current_motor_mode);
+    String jsonPayload = createJsonPayload(18.5381977,18.5381977,distance, 40, humidity, temperature, current_motor_mode);
     
 
     Serial.print("Publish message: ");
@@ -158,21 +158,21 @@ void loop() {
     strcat(topicPublish, sensorName);
     pubsubclient.publish(topicPublish, jsonPayload.c_str());
    
-    sendMessageToWebsocketServer("messageSendToUser", "user112233", "user332211", jsonPayload.c_str());
-   Serial.print("websocket message published-- ");
   }
 }
 
-String createJsonPayload(int distance, int maxValue, float humidity, float temperature, String current_motor_mode) {
+String createJsonPayload(float latitudeLong, float longitudeLong, int distance, int maxValue, float humidity, float temperature, String current_motor_mode) {
   StaticJsonDocument<200> jsonDoc;
 
+  jsonDoc["latitudeLongEsp"] = 18.5381977;
+  jsonDoc["longitudeLongEsp"] = 73.8301322;
   jsonDoc["data"] = distance;
   jsonDoc["maxValue"] = maxValue;
   jsonDoc["current_button_status"] = (digitalRead(externalLedPin) == LOW) ? "1" : "0";  // Check the state of externalLedPin
   jsonDoc["humidity"] = humidity;
-
   jsonDoc["temperature"] = temperature;
   jsonDoc["current_motor_mode"] = current_motor_mode;
+
   String payload;
   serializeJson(jsonDoc, payload);
 
